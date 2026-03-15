@@ -1,0 +1,1508 @@
+[
+  {
+    "image": "imgs\\1.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\1_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          252,
+          501,
+          398,
+          564
+        ],
+        "conf": 0.8499255776405334,
+        "landmarks": [
+          398,
+          564,
+          257,
+          555,
+          253,
+          501,
+          394,
+          510
+        ],
+        "class_id": 0,
+        "plate_text": "FE20579",
+        "ocr_score": 0.3853
+      }
+    ]
+  },
+  {
+    "image": "imgs\\10.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\10_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          136,
+          229,
+          233,
+          258
+        ],
+        "conf": 0.8079928755760193,
+        "landmarks": [
+          233,
+          258,
+          137,
+          256,
+          137,
+          229,
+          233,
+          230
+        ],
+        "class_id": 0,
+        "plate_text": "GA13189",
+        "ocr_score": 0.9992
+      }
+    ]
+  },
+  {
+    "image": "imgs\\10_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\10_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          135,
+          228,
+          234,
+          260
+        ],
+        "conf": 0.7777943015098572,
+        "landmarks": [
+          234,
+          259,
+          137,
+          258,
+          137,
+          229,
+          234,
+          230
+        ],
+        "class_id": 0,
+        "plate_text": "GA13189",
+        "ocr_score": 0.9975
+      }
+    ]
+  },
+  {
+    "image": "imgs\\11.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\11_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          359,
+          323,
+          489,
+          372
+        ],
+        "conf": 0.83072829246521,
+        "landmarks": [
+          487,
+          361,
+          360,
+          372,
+          361,
+          334,
+          489,
+          323
+        ],
+        "class_id": 0,
+        "plate_text": "66666",
+        "ocr_score": 0.9982
+      }
+    ]
+  },
+  {
+    "image": "imgs\\11_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\11_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          359,
+          324,
+          490,
+          372
+        ],
+        "conf": 0.8321970105171204,
+        "landmarks": [
+          488,
+          364,
+          360,
+          372,
+          361,
+          332,
+          490,
+          325
+        ],
+        "class_id": 0,
+        "plate_text": "GK66666",
+        "ocr_score": 0.8245
+      }
+    ]
+  },
+  {
+    "image": "imgs\\12.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\12_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          175,
+          265,
+          243,
+          305
+        ],
+        "conf": 0.36529552936553955,
+        "landmarks": [
+          188,
+          304,
+          222,
+          304,
+          223,
+          266,
+          190,
+          266
+        ],
+        "class_id": 0,
+        "plate_text": "49885",
+        "ocr_score": 0.9995
+      }
+    ]
+  },
+  {
+    "image": "imgs\\12_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\12_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          173,
+          262,
+          243,
+          308
+        ],
+        "conf": 0.5717215538024902,
+        "landmarks": [
+          175,
+          306,
+          241,
+          307,
+          242,
+          263,
+          174,
+          263
+        ],
+        "class_id": 0,
+        "plate_text": "49885",
+        "ocr_score": 1.0
+      }
+    ]
+  },
+  {
+    "image": "imgs\\13.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\13_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          210,
+          231,
+          287,
+          272
+        ],
+        "conf": 0.35745295882225037,
+        "landmarks": [
+          210,
+          270,
+          287,
+          271,
+          287,
+          233,
+          211,
+          231
+        ],
+        "class_id": 0,
+        "plate_text": "45331",
+        "ocr_score": 0.8401
+      }
+    ]
+  },
+  {
+    "image": "imgs\\13_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\13_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          208,
+          233,
+          290,
+          273
+        ],
+        "conf": 0.5427113175392151,
+        "landmarks": [
+          211,
+          271,
+          289,
+          273,
+          288,
+          235,
+          210,
+          233
+        ],
+        "class_id": 0,
+        "plate_text": "4533",
+        "ocr_score": 0.8602
+      }
+    ]
+  },
+  {
+    "image": "imgs\\14.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\14_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          297,
+          385,
+          399,
+          441
+        ],
+        "conf": 0.4166327714920044,
+        "landmarks": [
+          397,
+          440,
+          300,
+          442,
+          301,
+          388,
+          398,
+          387
+        ],
+        "class_id": 0,
+        "plate_text": "46673",
+        "ocr_score": 0.996
+      }
+    ]
+  },
+  {
+    "image": "imgs\\14_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\14_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          294,
+          384,
+          399,
+          444
+        ],
+        "conf": 0.5321455597877502,
+        "landmarks": [
+          306,
+          444,
+          386,
+          444,
+          387,
+          386,
+          308,
+          386
+        ],
+        "class_id": 0,
+        "plate_text": "19",
+        "ocr_score": 0.9104
+      }
+    ]
+  },
+  {
+    "image": "imgs\\15.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\15_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          317,
+          114,
+          380,
+          147
+        ],
+        "conf": 0.5610966682434082,
+        "landmarks": [
+          318,
+          147,
+          379,
+          147,
+          379,
+          115,
+          318,
+          115
+        ],
+        "class_id": 0,
+        "plate_text": "00796",
+        "ocr_score": 1.0
+      }
+    ]
+  },
+  {
+    "image": "imgs\\15_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\15_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          317,
+          114,
+          379,
+          149
+        ],
+        "conf": 0.5956845879554749,
+        "landmarks": [
+          319,
+          150,
+          379,
+          149,
+          377,
+          115,
+          317,
+          116
+        ],
+        "class_id": 0,
+        "plate_text": "00796",
+        "ocr_score": 1.0
+      }
+    ]
+  },
+  {
+    "image": "imgs\\16.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\16_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          143,
+          226,
+          236,
+          259
+        ],
+        "conf": 0.7283753752708435,
+        "landmarks": [
+          236,
+          259,
+          144,
+          258,
+          143,
+          226,
+          235,
+          227
+        ],
+        "class_id": 0,
+        "plate_text": "IL88888",
+        "ocr_score": 0.9915
+      }
+    ]
+  },
+  {
+    "image": "imgs\\16_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\16_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          143,
+          227,
+          239,
+          260
+        ],
+        "conf": 0.8349565267562866,
+        "landmarks": [
+          238,
+          259,
+          143,
+          259,
+          144,
+          227,
+          239,
+          228
+        ],
+        "class_id": 0,
+        "plate_text": "IL88888",
+        "ocr_score": 0.9632
+      }
+    ]
+  },
+  {
+    "image": "imgs\\17.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\17_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          164,
+          174,
+          311,
+          226
+        ],
+        "conf": 0.773330569267273,
+        "landmarks": [
+          310,
+          222,
+          167,
+          225,
+          165,
+          179,
+          307,
+          175
+        ],
+        "class_id": 0,
+        "plate_text": "I1984761",
+        "ocr_score": 0.572
+      }
+    ]
+  },
+  {
+    "image": "imgs\\17_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\17_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          162,
+          175,
+          313,
+          227
+        ],
+        "conf": 0.7873271107673645,
+        "landmarks": [
+          312,
+          224,
+          163,
+          226,
+          163,
+          178,
+          311,
+          176
+        ],
+        "class_id": 0,
+        "plate_text": "0198476",
+        "ocr_score": 0.7421
+      }
+    ]
+  },
+  {
+    "image": "imgs\\18.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\18_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          528,
+          390,
+          797,
+          481
+        ],
+        "conf": 0.8301987051963806,
+        "landmarks": [
+          794,
+          463,
+          531,
+          480,
+          531,
+          408,
+          795,
+          391
+        ],
+        "class_id": 0,
+        "plate_text": "DAD03210",
+        "ocr_score": 0.6254
+      }
+    ]
+  },
+  {
+    "image": "imgs\\18_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\18_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          528,
+          392,
+          796,
+          483
+        ],
+        "conf": 0.8379237055778503,
+        "landmarks": [
+          794,
+          467,
+          530,
+          482,
+          530,
+          407,
+          795,
+          393
+        ],
+        "class_id": 0,
+        "plate_text": "DAD03210",
+        "ocr_score": 0.6011
+      }
+    ]
+  },
+  {
+    "image": "imgs\\19.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\19_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          289,
+          540,
+          456,
+          651
+        ],
+        "conf": 0.8663833737373352,
+        "landmarks": [
+          454,
+          652,
+          291,
+          601,
+          294,
+          540,
+          456,
+          590
+        ],
+        "class_id": 0,
+        "plate_text": "VL838",
+        "ocr_score": 0.4916
+      }
+    ]
+  },
+  {
+    "image": "imgs\\19_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\19_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          288,
+          539,
+          460,
+          653
+        ],
+        "conf": 0.8623497486114502,
+        "landmarks": [
+          458,
+          653,
+          290,
+          602,
+          290,
+          539,
+          458,
+          590
+        ],
+        "class_id": 0,
+        "plate_text": "QE",
+        "ocr_score": 0.5606
+      }
+    ]
+  },
+  {
+    "image": "imgs\\1_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\1_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          252,
+          500,
+          404,
+          566
+        ],
+        "conf": 0.8403483033180237,
+        "landmarks": [
+          403,
+          566,
+          253,
+          559,
+          254,
+          501,
+          404,
+          508
+        ],
+        "class_id": 0,
+        "plate_text": "JE",
+        "ocr_score": 0.8207
+      }
+    ]
+  },
+  {
+    "image": "imgs\\2.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\2_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          1628,
+          1355,
+          1748,
+          1394
+        ],
+        "conf": 0.5540395975112915,
+        "landmarks": [
+          1747,
+          1394,
+          1627,
+          1393,
+          1627,
+          1356,
+          1747,
+          1356
+        ],
+        "class_id": 0,
+        "plate_text": "B",
+        "ocr_score": 0.5791
+      },
+      {
+        "bbox": [
+          951,
+          954,
+          1021,
+          980
+        ],
+        "conf": 0.3150491416454315,
+        "landmarks": [
+          949,
+          980,
+          1014,
+          980,
+          1014,
+          956,
+          950,
+          955
+        ],
+        "class_id": 0,
+        "plate_text": "ABISZKZ",
+        "ocr_score": 0.5594
+      }
+    ]
+  },
+  {
+    "image": "imgs\\20.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\20_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          768,
+          858,
+          962,
+          924
+        ],
+        "conf": 0.7293406128883362,
+        "landmarks": [
+          960,
+          920,
+          770,
+          923,
+          770,
+          862,
+          960,
+          859
+        ],
+        "class_id": 0,
+        "plate_text": "BA067250",
+        "ocr_score": 0.5248
+      }
+    ]
+  },
+  {
+    "image": "imgs\\20_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\20_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          767,
+          856,
+          970,
+          926
+        ],
+        "conf": 0.7918694615364075,
+        "landmarks": [
+          969,
+          923,
+          768,
+          926,
+          770,
+          860,
+          969,
+          857
+        ],
+        "class_id": 0,
+        "plate_text": "067252",
+        "ocr_score": 0.7022
+      }
+    ]
+  },
+  {
+    "image": "imgs\\2_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\2_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          1619,
+          1345,
+          1758,
+          1397
+        ],
+        "conf": 0.604404628276825,
+        "landmarks": [
+          1757,
+          1396,
+          1620,
+          1397,
+          1620,
+          1347,
+          1756,
+          1346
+        ],
+        "class_id": 0,
+        "plate_text": "QBD01566",
+        "ocr_score": 0.2629
+      },
+      {
+        "bbox": [
+          945,
+          953,
+          1021,
+          981
+        ],
+        "conf": 0.4251195788383484,
+        "landmarks": [
+          944,
+          980,
+          1014,
+          981,
+          1014,
+          954,
+          944,
+          953
+        ],
+        "class_id": 0,
+        "plate_text": "I9BISZK",
+        "ocr_score": 0.3541
+      }
+    ]
+  },
+  {
+    "image": "imgs\\3.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\3_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          191,
+          284,
+          544,
+          525
+        ],
+        "conf": 0.8661900758743286,
+        "landmarks": [
+          542,
+          524,
+          194,
+          412,
+          192,
+          285,
+          539,
+          397
+        ],
+        "class_id": 0,
+        "plate_text": "M",
+        "ocr_score": 0.6543
+      }
+    ]
+  },
+  {
+    "image": "imgs\\3_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\3_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          191,
+          284,
+          546,
+          527
+        ],
+        "conf": 0.8603787422180176,
+        "landmarks": [
+          546,
+          526,
+          198,
+          414,
+          191,
+          286,
+          537,
+          397
+        ],
+        "class_id": 0,
+        "plate_text": "A",
+        "ocr_score": 0.9996
+      }
+    ]
+  },
+  {
+    "image": "imgs\\4.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\4_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          181,
+          504,
+          419,
+          583
+        ],
+        "conf": 0.8606265187263489,
+        "landmarks": [
+          420,
+          583,
+          187,
+          579,
+          181,
+          505,
+          414,
+          508
+        ],
+        "class_id": 0,
+        "plate_text": "TA328L21",
+        "ocr_score": 0.73
+      }
+    ]
+  },
+  {
+    "image": "imgs\\4_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\4_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          182,
+          504,
+          422,
+          587
+        ],
+        "conf": 0.8565956354141235,
+        "landmarks": [
+          422,
+          586,
+          184,
+          584,
+          184,
+          505,
+          422,
+          506
+        ],
+        "class_id": 0,
+        "plate_text": "14328L21",
+        "ocr_score": 0.5641
+      }
+    ]
+  },
+  {
+    "image": "imgs\\5.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\5_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          290,
+          522,
+          387,
+          558
+        ],
+        "conf": 0.8186196088790894,
+        "landmarks": [
+          387,
+          556,
+          291,
+          558,
+          291,
+          524,
+          387,
+          523
+        ],
+        "class_id": 0,
+        "plate_text": "CH47000",
+        "ocr_score": 0.6034
+      }
+    ]
+  },
+  {
+    "image": "imgs\\5_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\5_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          289,
+          521,
+          391,
+          559
+        ],
+        "conf": 0.8229382634162903,
+        "landmarks": [
+          389,
+          557,
+          289,
+          559,
+          290,
+          523,
+          391,
+          522
+        ],
+        "class_id": 0,
+        "plate_text": "7H47OC",
+        "ocr_score": 0.1745
+      }
+    ]
+  },
+  {
+    "image": "imgs\\6.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\6_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          232,
+          413,
+          332,
+          448
+        ],
+        "conf": 0.7151930928230286,
+        "landmarks": [
+          331,
+          448,
+          232,
+          445,
+          234,
+          413,
+          333,
+          416
+        ],
+        "class_id": 0,
+        "plate_text": "PA1707",
+        "ocr_score": 0.9773
+      }
+    ]
+  },
+  {
+    "image": "imgs\\6_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\6_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          233,
+          412,
+          334,
+          449
+        ],
+        "conf": 0.679176926612854,
+        "landmarks": [
+          333,
+          449,
+          233,
+          446,
+          235,
+          413,
+          334,
+          416
+        ],
+        "class_id": 0,
+        "plate_text": "PA1707",
+        "ocr_score": 0.7303
+      }
+    ]
+  },
+  {
+    "image": "imgs\\7.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\7_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          132,
+          154,
+          242,
+          195
+        ],
+        "conf": 0.6284576058387756,
+        "landmarks": [
+          134,
+          194,
+          238,
+          194,
+          238,
+          154,
+          135,
+          154
+        ],
+        "class_id": 0,
+        "plate_text": "224424",
+        "ocr_score": 1.0
+      }
+    ]
+  },
+  {
+    "image": "imgs\\7_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\7_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          130,
+          155,
+          241,
+          196
+        ],
+        "conf": 0.6081733107566833,
+        "landmarks": [
+          133,
+          196,
+          239,
+          195,
+          238,
+          155,
+          132,
+          156
+        ],
+        "class_id": 0,
+        "plate_text": "224424",
+        "ocr_score": 1.0
+      }
+    ]
+  },
+  {
+    "image": "imgs\\8.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\8_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          317,
+          255,
+          398,
+          278
+        ],
+        "conf": 0.8323692679405212,
+        "landmarks": [
+          397,
+          277,
+          318,
+          278,
+          319,
+          256,
+          398,
+          256
+        ],
+        "class_id": 0,
+        "plate_text": "VA30093",
+        "ocr_score": 1.0
+      },
+      {
+        "bbox": [
+          40,
+          300,
+          82,
+          314
+        ],
+        "conf": 0.5040488839149475,
+        "landmarks": [
+          40,
+          314,
+          82,
+          313,
+          82,
+          300,
+          41,
+          301
+        ],
+        "class_id": 0,
+        "plate_text": "00N67C2",
+        "ocr_score": 0.1195
+      }
+    ]
+  },
+  {
+    "image": "imgs\\8_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\8_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          316,
+          254,
+          399,
+          280
+        ],
+        "conf": 0.7951405048370361,
+        "landmarks": [
+          398,
+          279,
+          316,
+          278,
+          318,
+          254,
+          399,
+          255
+        ],
+        "class_id": 0,
+        "plate_text": "VA30093",
+        "ocr_score": 1.0
+      },
+      {
+        "bbox": [
+          38,
+          297,
+          83,
+          315
+        ],
+        "conf": 0.32832446694374084,
+        "landmarks": [
+          39,
+          315,
+          82,
+          314,
+          82,
+          297,
+          39,
+          298
+        ],
+        "class_id": 0,
+        "plate_text": "T7C",
+        "ocr_score": 0.4534
+      }
+    ]
+  },
+  {
+    "image": "imgs\\9.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\9_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          198,
+          468,
+          306,
+          500
+        ],
+        "conf": 0.7831275463104248,
+        "landmarks": [
+          305,
+          499,
+          199,
+          499,
+          200,
+          469,
+          306,
+          469
+        ],
+        "class_id": 0,
+        "plate_text": "F02599",
+        "ocr_score": 0.97
+      }
+    ]
+  },
+  {
+    "image": "imgs\\9_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\9_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          198,
+          467,
+          308,
+          501
+        ],
+        "conf": 0.7912704348564148,
+        "landmarks": [
+          307,
+          501,
+          199,
+          500,
+          199,
+          467,
+          308,
+          468
+        ],
+        "class_id": 0,
+        "plate_text": "F02599",
+        "ocr_score": 0.8421
+      }
+    ]
+  },
+  {
+    "image": "imgs\\res.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\res_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          170,
+          144,
+          371,
+          345
+        ],
+        "conf": 0.8703327775001526,
+        "landmarks": [
+          363,
+          346,
+          177,
+          247,
+          181,
+          144,
+          367,
+          243
+        ],
+        "class_id": 0,
+        "plate_text": "MA003731",
+        "ocr_score": 0.8185
+      },
+      {
+        "bbox": [
+          167,
+          602,
+          336,
+          660
+        ],
+        "conf": 0.6231216192245483,
+        "landmarks": [
+          169,
+          660,
+          335,
+          653,
+          332,
+          602,
+          167,
+          609
+        ],
+        "class_id": 0,
+        "plate_text": "1984761",
+        "ocr_score": 0.5493
+      },
+      {
+        "bbox": [
+          1328,
+          230,
+          1490,
+          279
+        ],
+        "conf": 0.5438976883888245,
+        "landmarks": [
+          1489,
+          279,
+          1328,
+          278,
+          1329,
+          231,
+          1490,
+          233
+        ],
+        "class_id": 0,
+        "plate_text": "GA13189",
+        "ocr_score": 0.9992
+      },
+      {
+        "bbox": [
+          863,
+          714,
+          984,
+          757
+        ],
+        "conf": 0.5394114255905151,
+        "landmarks": [
+          983,
+          755,
+          860,
+          757,
+          861,
+          716,
+          983,
+          715
+        ],
+        "class_id": 0,
+        "plate_text": "GK66666",
+        "ocr_score": 0.8918
+      },
+      {
+        "bbox": [
+          783,
+          180,
+          893,
+          230
+        ],
+        "conf": 0.47364649176597595,
+        "landmarks": [
+          892,
+          230,
+          788,
+          229,
+          788,
+          180,
+          892,
+          181
+        ],
+        "class_id": 0,
+        "plate_text": "00796",
+        "ocr_score": 1.0
+      },
+      {
+        "bbox": [
+          1915,
+          276,
+          2020,
+          323
+        ],
+        "conf": 0.40880197286605835,
+        "landmarks": [
+          1946,
+          323,
+          1981,
+          322,
+          1982,
+          278,
+          1947,
+          279
+        ],
+        "class_id": 0,
+        "plate_text": "46673",
+        "ocr_score": 1.0
+      },
+      {
+        "bbox": [
+          1358,
+          690,
+          1454,
+          731
+        ],
+        "conf": 0.37432408332824707,
+        "landmarks": [
+          1360,
+          731,
+          1452,
+          730,
+          1452,
+          690,
+          1361,
+          691
+        ],
+        "class_id": 0,
+        "plate_text": "5",
+        "ocr_score": 0.9548
+      }
+    ]
+  },
+  {
+    "image": "imgs\\res_r.jpg",
+    "output_image": "runs\\plate_ocr_cpu\\res_r_ocr.jpg",
+    "plates": [
+      {
+        "bbox": [
+          167,
+          141,
+          376,
+          348
+        ],
+        "conf": 0.8545472025871277,
+        "landmarks": [
+          369,
+          349,
+          175,
+          252,
+          176,
+          141,
+          369,
+          239
+        ],
+        "class_id": 0,
+        "plate_text": "IA003731",
+        "ocr_score": 0.4926
+      },
+      {
+        "bbox": [
+          1314,
+          226,
+          1498,
+          285
+        ],
+        "conf": 0.6826479434967041,
+        "landmarks": [
+          1497,
+          285,
+          1314,
+          282,
+          1316,
+          226,
+          1498,
+          229
+        ],
+        "class_id": 0,
+        "plate_text": "GA13189",
+        "ocr_score": 0.9982
+      },
+      {
+        "bbox": [
+          160,
+          601,
+          336,
+          664
+        ],
+        "conf": 0.6758296489715576,
+        "landmarks": [
+          162,
+          664,
+          334,
+          658,
+          333,
+          601,
+          161,
+          607
+        ],
+        "class_id": 0,
+        "plate_text": "1984761",
+        "ocr_score": 0.9943
+      },
+      {
+        "bbox": [
+          1905,
+          271,
+          2028,
+          329
+        ],
+        "conf": 0.5354366898536682,
+        "landmarks": [
+          1911,
+          327,
+          2021,
+          326,
+          2020,
+          273,
+          1911,
+          274
+        ],
+        "class_id": 0,
+        "plate_text": "46673",
+        "ocr_score": 0.9997
+      },
+      {
+        "bbox": [
+          780,
+          177,
+          893,
+          235
+        ],
+        "conf": 0.5283030271530151,
+        "landmarks": [
+          892,
+          234,
+          785,
+          233,
+          784,
+          178,
+          892,
+          180
+        ],
+        "class_id": 0,
+        "plate_text": "00796",
+        "ocr_score": 1.0
+      },
+      {
+        "bbox": [
+          1354,
+          688,
+          1459,
+          735
+        ],
+        "conf": 0.49082428216934204,
+        "landmarks": [
+          1355,
+          735,
+          1457,
+          733,
+          1457,
+          690,
+          1355,
+          692
+        ],
+        "class_id": 0,
+        "plate_text": "A533",
+        "ocr_score": 0.637
+      }
+    ]
+  }
+]
