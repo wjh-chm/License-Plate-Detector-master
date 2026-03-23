@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # License Plate Detection with Yolov5
 
 距离上次车牌检测模型更新已经过了一年多的时间，这段时间也有很多快速、准确的模型提出，我们利用单物体检测算法Yolov5进行了车牌检测模型的训练，通过测试，检测效果和适用性都更突出，支持的模型也更为丰富。
@@ -48,3 +49,6 @@
 - [yolov5-face](https://github.com/deepcam-cn/yolov5-face)
 - [CCPD](https://github.com/detectRecog/CCPD)
 
+=======
+# License-Plate-Detector-master
+>>>>>>> 551e451b5188c42a7b5f7db74af357a0b527eeca
