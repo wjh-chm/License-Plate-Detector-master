@@ -21,13 +21,13 @@ from utils.general import check_img_size, non_max_suppression_plate, scale_coord
 def parse_args():
     parser = argparse.ArgumentParser(description="Plate detection with per-image JSON + visualization")
     parser.add_argument("--weights", type=str, default="weights/best.pt", help="YOLO weights path")
-    parser.add_argument("--source", type=str, default="imgs", help="Image file or directory")
+    parser.add_argument("--source", type=str, default="test", help="Image file or directory")
     parser.add_argument("--img-size", type=int, default=800, help="Inference image size")
     parser.add_argument("--conf-thres", type=float, default=0.3, help="Confidence threshold")
     parser.add_argument("--iou-thres", type=float, default=0.5, help="IoU threshold")
     parser.add_argument("--device", type=str, default="cuda:0", help="cuda:0 or cpu")
     parser.add_argument("--save-dir", type=str, default="runs/plate_detect", help="Output directory")
-    parser.add_argument("--save-vis", action="store_true", help="Save visualized detection images")
+    parser.add_argument("--save-vis", default="test",action="store_true", help="Save visualized detection images")
     parser.add_argument("--json-dir", type=str, default="", help="Directory to save per-image json files")
     return parser.parse_args()
 

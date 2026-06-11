@@ -1,0 +1,38 @@
+# Python bytecode and caches
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local editor and tool state
+.vscode/
+.idea/
+.codex/
+
+# Temporary files
+.tmp/
+*.tmp
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Runtime outputs and experiment artifacts
+runs/
+test/
+event_frames/
+
+# Local datasets and bulky intermediate data
+dvSave-2026_04_26_22_12_37/
+eventdata/
+
+# Optional media exports generated during experiments
+imgs/*_r.jpg
+imgs/*_ocr.jpg
+imgs/*.mp4
