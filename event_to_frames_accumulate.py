@@ -47,14 +47,32 @@ def make_accumulate_window_frame(window_events, width, height, acc_threshold):
     return norm.astype(np.uint8)
 
 
-def process_events_to_frames(events, window_ms, width, height, acc_threshold, max_frames=None):
+def process_events_to_frames(
+    events,
+    window_ms,
+    width,
+    height,
+    acc_threshold,
+    max_frames=None,
+    time_start_us=None,
+    time_end_us=None,
+):
     if len(events) == 0:
         return []
 
     timestamps = events[:, 0]
-    t_min = int(np.min(timestamps))
-    t_max = int(np.max(timestamps))
+    raw_min = int(np.min(timestamps))
+    raw_max = int(np.max(timestamps))
+
+    t_min = raw_min if time_start_us is None else max(raw_min, int(time_start_us))
+    t_max = raw_max if time_end_us is None else min(raw_max, int(time_end_us))
+    if t_max <= t_min:
+        return []
+
     window_us = int(window_ms * 1000)
+    if window_us <= 0:
+        raise ValueError("--window-ms must be > 0")
+
     total_windows = int(np.ceil((t_max - t_min) / float(window_us)))
     if max_frames is not None and max_frames > 0:
         total_windows = min(total_windows, int(max_frames))
@@ -62,7 +80,7 @@ def process_events_to_frames(events, window_ms, width, height, acc_threshold, ma
     frames = []
     for i in range(total_windows):
         start_us = t_min + i * window_us
-        end_us = start_us + window_us
+        end_us = min(start_us + window_us, t_max)
         mask = (timestamps >= start_us) & (timestamps < end_us)
         window_events = events[mask]
         frame = make_accumulate_window_frame(window_events, width, height, acc_threshold)
@@ -93,6 +111,8 @@ def main():
     parser.add_argument("--acc-threshold", type=float, default=0.0, help="Per-pixel accumulation clip threshold, 0 means no clip")
     parser.add_argument("--max-frames", type=int, default=None, help="Max generated frames")
     parser.add_argument("--save-every", type=int, default=5, help="Save one frame every N generated frames")
+    parser.add_argument("--time-start-us", type=int, default=None, help="Start time (us), inclusive")
+    parser.add_argument("--time-end-us", type=int, default=None, help="End time (us), exclusive")
     parser.add_argument("--output-dir", type=str, default="event_frames_accumulate", help="Output directory")
     args = parser.parse_args()
 
@@ -104,6 +124,10 @@ def main():
     print(f"Total events: {len(events)}")
     print(f"Window size: {args.window_ms} ms")
     print(f"Accumulation threshold: {args.acc_threshold}")
+    if args.time_start_us is not None or args.time_end_us is not None:
+        print(f"Time range constraint(us): [{args.time_start_us}, {args.time_end_us})")
+    else:
+        print("Time range constraint(us): full range")
 
     frames = process_events_to_frames(
         events=events,
@@ -112,6 +136,8 @@ def main():
         height=args.height,
         acc_threshold=args.acc_threshold,
         max_frames=args.max_frames,
+        time_start_us=args.time_start_us,
+        time_end_us=args.time_end_us,
     )
     saved = save_every_n_frames(frames, args.output_dir, args.save_every)
 

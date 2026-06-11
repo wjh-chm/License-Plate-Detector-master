@@ -1,180 +1,205 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: utf-8 -*-
+"""
+检测脚本：
+1) 读取图片/目录
+2) 每张图片导出一个检测 JSON
+3) 可选导出可视化检测图（用于人工检查和矫正）
+"""
+
 import argparse
-import time
+import json
 from pathlib import Path
 
 import cv2
 import torch
-import torch.backends.cudnn as cudnn
-from numpy import random
-import copy
 
 from models.experimental import attempt_load
 from utils.datasets import letterbox
-from utils.general import check_img_size, non_max_suppression_plate, apply_classifier, scale_coords, xyxy2xywh, \
-    strip_optimizer, set_logging, increment_path
-from utils.plots import plot_one_box
-from utils.torch_utils import select_device, load_classifier, time_synchronized
-import os
+from utils.general import check_img_size, non_max_suppression_plate, scale_coords
 
 
-cv2.namedWindow("img", 0);
-cv2.resizeWindow("img", 1280,720);
+def parse_args():
+    parser = argparse.ArgumentParser(description="Plate detection with per-image JSON + visualization")
+    parser.add_argument("--weights", type=str, default="weights/best.pt", help="YOLO weights path")
+    parser.add_argument("--source", type=str, default="imgs", help="Image file or directory")
+    parser.add_argument("--img-size", type=int, default=800, help="Inference image size")
+    parser.add_argument("--conf-thres", type=float, default=0.3, help="Confidence threshold")
+    parser.add_argument("--iou-thres", type=float, default=0.5, help="IoU threshold")
+    parser.add_argument("--device", type=str, default="cuda:0", help="cuda:0 or cpu")
+    parser.add_argument("--save-dir", type=str, default="runs/plate_detect", help="Output directory")
+    parser.add_argument("--save-vis", action="store_true", help="Save visualized detection images")
+    parser.add_argument("--json-dir", type=str, default="", help="Directory to save per-image json files")
+    return parser.parse_args()
 
-def load_model(weights, device):
-    model = attempt_load(weights, map_location=device)  # load FP32 model
-    return model
+
+def resolve_device(device_arg):
+    if device_arg.lower().startswith("cuda") and not torch.cuda.is_available():
+        print("CUDA is not available, fallback to CPU.")
+        return torch.device("cpu")
+    return torch.device(device_arg)
+
+
+def get_image_paths(source):
+    src = Path(source)
+    if src.is_file():
+        return [src]
+    if src.is_dir():
+        suffixes = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+        return sorted([p for p in src.rglob("*") if p.suffix.lower() in suffixes])
+    raise FileNotFoundError(f"Source not found: {source}")
 
 
 def scale_coords_landmarks(img1_shape, coords, img0_shape, ratio_pad=None):
-    # Rescale coords (xyxy) from img1_shape to img0_shape
-    if ratio_pad is None:  # calculate from img0_shape
-        gain = min(img1_shape[0] / img0_shape[0], img1_shape[1] / img0_shape[1])  # gain  = old / new
-        pad = (img1_shape[1] - img0_shape[1] * gain) / 2, (img1_shape[0] - img0_shape[0] * gain) / 2  # wh padding
+    if ratio_pad is None:
+        gain = min(img1_shape[0] / img0_shape[0], img1_shape[1] / img0_shape[1])
+        pad = (img1_shape[1] - img0_shape[1] * gain) / 2, (img1_shape[0] - img0_shape[0] * gain) / 2
     else:
         gain = ratio_pad[0][0]
         pad = ratio_pad[1]
 
-    coords[:, [0, 2, 4, 6]] -= pad[0]  # x padding
-    coords[:, [1, 3, 5, 7]] -= pad[1]  # y padding
+    coords[:, [0, 2, 4, 6]] -= pad[0]
+    coords[:, [1, 3, 5, 7]] -= pad[1]
     coords[:, :8] /= gain
-    #clip_coords(coords, img0_shape)
-    coords[:, 0].clamp_(0, img0_shape[1])  # x1
-    coords[:, 1].clamp_(0, img0_shape[0])  # y1
-    coords[:, 2].clamp_(0, img0_shape[1])  # x2
-    coords[:, 3].clamp_(0, img0_shape[0])  # y2
-    coords[:, 4].clamp_(0, img0_shape[1])  # x3
-    coords[:, 5].clamp_(0, img0_shape[0])  # y3
-    coords[:, 6].clamp_(0, img0_shape[1])  # x4
-    coords[:, 7].clamp_(0, img0_shape[0])  # y4
 
+    coords[:, [0, 2, 4, 6]].clamp_(0, img0_shape[1])
+    coords[:, [1, 3, 5, 7]].clamp_(0, img0_shape[0])
     return coords
 
-def show_results(img, xywh, conf, landmarks, class_num):
-    h,w,c = img.shape
-    #tl = 1 or round(0.002 * (h + w) / 2) + 1  # line/font thickness
-    x1 = int(xywh[0] * w - 0.5 * xywh[2] * w)
-    y1 = int(xywh[1] * h - 0.5 * xywh[3] * h)
-    x2 = int(xywh[0] * w + 0.5 * xywh[2] * w)
-    y2 = int(xywh[1] * h + 0.5 * xywh[3] * h)
-    cv2.rectangle(img, (x1,y1), (x2, y2), (0,255,0), thickness=3, lineType=cv2.LINE_AA)
 
-    clors = [(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255)]
-
-    for i in range(4):
-        point_x = int(landmarks[2 * i] * w)
-        point_y = int(landmarks[2 * i + 1] * h)
-        cv2.circle(img, (point_x, point_y), 3, clors[i], -1)
-
-    label = str(conf)[:5]
-    return img
+def load_detector(weights, device):
+    model = attempt_load(weights, map_location=device)
+    model.eval()
+    return model
 
 
-
-def detect_one(model, image_path, device):
-    # Load model
-    img_size = 800
-    conf_thres = 0.3
-    iou_thres = 0.5
-
-    orgimg = cv2.imread(image_path)  # BGR
-    sp = orgimg.shape
-    h = sp[0]
-    w = sp[1]
-    #img_size = h
-    print(w,h)
-    img0 = copy.deepcopy(orgimg)
-    assert orgimg is not None, 'Image Not Found ' + image_path
-    h0, w0 = orgimg.shape[:2]  # orig hw
-    r = img_size / max(h0, w0)  # resize image to img_size
-    if r != 1:  # always resize down, only resize up if training with augmentation
-        interp = cv2.INTER_AREA if r < 1  else cv2.INTER_LINEAR
+def detect_single(model, device, image, img_size, conf_thres, iou_thres):
+    img0 = image.copy()
+    h0, w0 = img0.shape[:2]
+    r = img_size / max(h0, w0)
+    if r != 1:
+        interp = cv2.INTER_AREA if r < 1 else cv2.INTER_LINEAR
         img0 = cv2.resize(img0, (int(w0 * r), int(h0 * r)), interpolation=interp)
 
-    imgsz = check_img_size(img_size, s=model.stride.max())  # check img_size
-
+    imgsz = check_img_size(img_size, s=int(model.stride.max()))
     img = letterbox(img0, new_shape=imgsz)[0]
-    # Convert
-    img = img[:, :, ::-1].transpose(2, 0, 1).copy()  # BGR to RGB, to 3x416x416
+    img = img[:, :, ::-1].transpose(2, 0, 1).copy()
 
-    # Run inference
-    t0 = time.time()
+    tensor = torch.from_numpy(img).to(device).float() / 255.0
+    if tensor.ndimension() == 3:
+        tensor = tensor.unsqueeze(0)
 
-    img = torch.from_numpy(img).to(device)
-    img = img.float()  # uint8 to fp16/32
-    img /= 255.0  # 0 - 255 to 0.0 - 1.0
-    if img.ndimension() == 3:
-        img = img.unsqueeze(0)
+    with torch.no_grad():
+        pred = model(tensor)[0]
+        pred = non_max_suppression_plate(pred, conf_thres, iou_thres)
 
-    # Inference
-    t1 = time_synchronized()
-    pred = model(img)[0]
+    detections = []
+    for det in pred:
+        if not len(det):
+            continue
+        det[:, :4] = scale_coords(tensor.shape[2:], det[:, :4], image.shape).round()
+        det[:, 5:13] = scale_coords_landmarks(tensor.shape[2:], det[:, 5:13], image.shape).round()
 
-    # Apply NMS
-    pred = non_max_suppression_plate(pred, conf_thres, iou_thres)
+        for row in det:
+            x1, y1, x2, y2 = [int(v.item()) for v in row[:4]]
+            conf = float(row[4].item())
+            landmarks = [int(v.item()) for v in row[5:13]]
+            cls_id = int(row[13].item())
+            detections.append({
+                "bbox": [x1, y1, x2, y2],
+                "conf": conf,
+                "landmarks": landmarks,
+                "class_id": cls_id,
+            })
 
-    print('img.shape: ', img.shape)
-    print('orgimg.shape: ', orgimg.shape)
-
-    # Process detections
-    for i, det in enumerate(pred):  # detections per image
-        gn = torch.tensor(orgimg.shape)[[1, 0, 1, 0]].to(device)  # normalization gain whwh
-        gn_lks = torch.tensor(orgimg.shape)[[1, 0, 1, 0, 1, 0, 1, 0]].to(device)  # normalization gain landmarks
-        if len(det):
-            # Rescale boxes from img_size to im0 size
-            det[:, :4] = scale_coords(img.shape[2:], det[:, :4], orgimg.shape).round()
-
-            # Print results
-            for c in det[:, -1].unique():
-                n = (det[:, -1] == c).sum()  # detections per class
-
-            det[:, 5:13] = scale_coords_landmarks(img.shape[2:], det[:, 5:13], orgimg.shape).round()
-
-            for j in range(det.size()[0]):
-                xywh = (xyxy2xywh(det[j, :4].view(1, 4)) / gn).view(-1).tolist()
-                conf = det[j, 4].cpu().numpy()
-                landmarks = (det[j, 5:13].view(1, 8) / gn_lks).view(-1).tolist()
-                class_num = det[j, 13].cpu().numpy()
-                orgimg = show_results(orgimg, xywh, conf, landmarks, class_num)
-   
-    cv2.imshow("img",orgimg)
-    # Save annotated image with same base name + _r.jpg in the same directory as input
-    out_path = os.path.splitext(image_path)[0] + "_r.jpg"
-    cv2.imwrite(out_path, orgimg)
-    cv2.waitKey(0)
-
-def show_files(path, all_files):
-    # 首先遍历当前目录所有文件及文件夹
-    file_list = os.listdir(path)
-    # 准备循环判断每个元素是否是文件夹还是文件，是文件的话，把名称传入list，是文件夹的话，递归
-    for file in file_list:
-        # 利用os.path.join()方法取得路径全名，并存入cur_path变量，否则每次只能遍历一层目录
-        cur_path = os.path.join(path, file)
-        # 判断是否是文件夹
-        if os.path.isdir(cur_path):
-            show_files(cur_path, all_files)
-        else:
-            if not cur_path.endswith(('jpg')):
-                continue
-            else:
-                all_files.append(cur_path )
-
-    return all_files
-
-f = show_files("D:\project\License-Plate-Detector-master\imgs", [])
+    return detections
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weights/best.pt', help='model.pt path(s)')
-    parser.add_argument('--image', type=str, default='data/images/test.jpg', help='source')  # file/folder, 0 for webcam
-    parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
-    opt = parser.parse_args()
-    print(opt)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = load_model(opt.weights, device)
+def draw_detections(image, detections):
+    vis = image.copy()
+    for det in detections:
+        x1, y1, x2, y2 = det["bbox"]
+        cv2.rectangle(vis, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(vis, f"{det['conf']:.2f}", (x1, max(0, y1 - 8)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
-    for filename in f:
-        
-        print(filename)
-        detect_one(model, filename, device)
+        lms = det["landmarks"]
+        for i in range(4):
+            px, py = int(lms[2 * i]), int(lms[2 * i + 1])
+            cv2.circle(vis, (px, py), 2, (0, 255, 255), -1)
+    return vis
+
+
+def unique_json_path(json_dir, stem):
+    p = json_dir / f"{stem}.json"
+    if not p.exists():
+        return p
+    i = 1
+    while True:
+        p = json_dir / f"{stem}_{i}.json"
+        if not p.exists():
+            return p
+        i += 1
+
+
+def main():
+    args = parse_args()
+    save_dir = Path(args.save_dir)
+    save_dir.mkdir(parents=True, exist_ok=True)
+
+    json_dir = Path(args.json_dir) if args.json_dir else (save_dir / "detections")
+    json_dir.mkdir(parents=True, exist_ok=True)
+
+    device = resolve_device(args.device)
+    model = load_detector(args.weights, device)
+
+    image_paths = get_image_paths(args.source)
+    index_records = []
+
+    print(f"Detector device: {device}")
+    print(f"Images: {len(image_paths)}")
+
+    for image_path in image_paths:
+        image = cv2.imread(str(image_path))
+        if image is None:
+            print(f"Skip unreadable image: {image_path}")
+            continue
+
+        detections = detect_single(model, device, image, args.img_size, args.conf_thres, args.iou_thres)
+        out_vis = ""
+
+        if args.save_vis:
+            vis = draw_detections(image, detections)
+            vis_path = save_dir / f"{image_path.stem}_det.jpg"
+            cv2.imwrite(str(vis_path), vis)
+            out_vis = str(vis_path.resolve())
+
+        record = {
+            "image": str(image_path.resolve()),
+            "image_name": image_path.name,
+            "visualization": out_vis,
+            "detections": detections,
+        }
+
+        out_json = unique_json_path(json_dir, image_path.stem)
+        with out_json.open("w", encoding="utf-8") as f:
+            json.dump(record, f, ensure_ascii=False, indent=2)
+
+        index_records.append({
+            "image": str(image_path.resolve()),
+            "json": str(out_json.resolve()),
+            "visualization": out_vis,
+            "detections": len(detections),
+        })
+
+        print(f"Processed: {image_path} | dets={len(detections)} | json={out_json.name}")
+
+    index_path = save_dir / "detections_index.json"
+    with index_path.open("w", encoding="utf-8") as f:
+        json.dump(index_records, f, ensure_ascii=False, indent=2)
+
+    print(f"Per-image json dir: {json_dir}")
+    print(f"Index json: {index_path}")
+
+
+if __name__ == "__main__":
+    main()
