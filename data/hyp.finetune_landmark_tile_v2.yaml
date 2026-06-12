@@ -1,0 +1,34 @@
+# Tile-focused second-round fine-tuning.
+# Goal: keep the recall gains from tiled training while reducing false positives.
+# Strategy: start from the first tile model, lower the learning rate, and use
+# cleaner augmentations so the detector sees more realistic background tiles.
+
+lr0: 0.0012
+lrf: 0.20
+momentum: 0.843
+weight_decay: 0.00036
+warmup_epochs: 1.0
+warmup_momentum: 0.6
+warmup_bias_lr: 0.03
+box: 0.0296
+cls: 0.243
+landmark: 0.001
+cls_pw: 0.631
+obj: 0.36
+obj_pw: 0.911
+iou_t: 0.2
+anchor_t: 2.91
+# anchors: 3.63
+fl_gamma: 0.0
+hsv_h: 0.01
+hsv_s: 0.45
+hsv_v: 0.25
+degrees: 0.1
+translate: 0.08
+scale: 0.35
+shear: 0.1
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 0.0
+mixup: 0.0

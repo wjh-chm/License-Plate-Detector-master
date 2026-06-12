@@ -1,0 +1,5 @@
+train: D:/project/License-Plate-Detector-master/data/fusion_round1_quad_tiled_192o64_hardneg_train.txt
+val: D:/project/dataloader/exports/fusion_round1_quad_dataset_tiles_192_o64/images/val
+
+nc: 1
+names: ['plate']

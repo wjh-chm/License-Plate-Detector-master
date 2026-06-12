@@ -1,0 +1,5 @@
+train: D:/project/dataloader/exports/fusion_round1_quad_dataset_tiles_192_o64/images/train
+val: D:/project/dataloader/exports/fusion_round1_quad_dataset_tiles_192_o64/images/val
+
+nc: 1
+names: ['plate']

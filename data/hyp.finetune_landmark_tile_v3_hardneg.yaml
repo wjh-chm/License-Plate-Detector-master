@@ -1,0 +1,35 @@
+# Hard-negative stabilization round.
+# Start from the clean-augmentation tiled model, then fine-tune briefly on a
+# mixed train list that oversamples the background tiles the model still
+# confuses as plates. Use a smaller learning rate and milder augmentation so
+# we reduce false positives without over-shifting recall.
+
+lr0: 0.0008
+lrf: 0.25
+momentum: 0.843
+weight_decay: 0.00036
+warmup_epochs: 0.5
+warmup_momentum: 0.7
+warmup_bias_lr: 0.02
+box: 0.0296
+cls: 0.243
+landmark: 0.001
+cls_pw: 0.631
+obj: 0.36
+obj_pw: 0.911
+iou_t: 0.2
+anchor_t: 2.91
+# anchors: 3.63
+fl_gamma: 0.0
+hsv_h: 0.008
+hsv_s: 0.35
+hsv_v: 0.20
+degrees: 0.05
+translate: 0.04
+scale: 0.20
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 0.0
+mixup: 0.0
