@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 from models.common import Conv, Bottleneck, SPP, DWConv, Focus, BottleneckCSP, C3, ShuffleV2Block, Concat, NMS, autoShape, StemBlock
 from models.experimental import MixConv2d, CrossConv
+from models.layers.eca import C3ECA
+from models.layers.squeeze_excite import C3SE
 from utils.autoanchor import check_anchor_order
 from utils.general import make_divisible, check_file, set_logging
 from utils.torch_utils import time_synchronized, fuse_conv_and_bn, model_info, scale_img, initialize_weights, \
@@ -242,7 +244,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
                 pass
 
         n = max(round(n * gd), 1) if n > 1 else n  # depth gain
-        if m in [Conv, Bottleneck, SPP, DWConv, MixConv2d, Focus, CrossConv, BottleneckCSP, C3, ShuffleV2Block, StemBlock]:
+        if m in [Conv, Bottleneck, SPP, DWConv, MixConv2d, Focus, CrossConv, BottleneckCSP, C3, C3ECA, C3SE, ShuffleV2Block, StemBlock]:
             c1, c2 = ch[f], args[0]
 
             # Normal
@@ -264,7 +266,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
             #     c2 = make_divisible(c2, 8) if c2 != no else c2
 
             args = [c1, c2, *args[1:]]
-            if m in [BottleneckCSP, C3]:
+            if m in [BottleneckCSP, C3, C3ECA, C3SE]:
                 args.insert(2, n)
                 n = 1
         elif m is nn.BatchNorm2d:
